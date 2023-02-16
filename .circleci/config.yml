@@ -23,7 +23,6 @@ jobs:
 workflows:
   say-hello-workflow:
     jobs:
-      environment:
-      FOO: bar
+      - say-hello
       
 
