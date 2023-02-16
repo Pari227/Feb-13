@@ -6,9 +6,6 @@ version: 2.1
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 
 jobs:
-  build:
-    environment:
-      MY_ENV_VAR: newone
   say-hello:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
@@ -16,11 +13,17 @@ jobs:
       - image: cimg/base:stable
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+    environment:
+      MY_ENV_VAR: newone
     steps:
       - checkout
       - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+          name: Send environment variable to Datadog
+          command: |
+            curl -X POST -H "Content-type: application/json" \
+                 -H "DD-API-KEY: a38f0d76c4d1eb69be16cddf3b6593a7" \
+                 -d '{"name": "my-environment-variable", "value": "'"$MY_ENV_VAR"'"}' \
+                 "https://api.datadoghq.com/api/v1/series"
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
