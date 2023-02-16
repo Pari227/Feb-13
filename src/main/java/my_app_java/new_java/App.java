@@ -11,6 +11,5 @@ public class App
         System.out.println( "Hello World!" );
         System.out.println( "Good Job!" );
         System.out.println( "123!" );
-        System.out.println( "Testing!" );
     }
 }
