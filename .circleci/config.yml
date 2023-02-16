@@ -4,6 +4,12 @@ version: 2.1
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+orbs:
+  - datadog/gauge:
+    metric: "myapp.requests"
+    value: 1
+    tags: ["env:prod", "app:myapp"]
+    api_key: a38f0d76c4d1eb69be16cddf3b6593a7
 jobs:
   say-hello:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
@@ -17,8 +23,6 @@ jobs:
       - run:
           name: "Say hello"
           command: "echo Hello, World!"
-          environment:
-            env: bar
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
