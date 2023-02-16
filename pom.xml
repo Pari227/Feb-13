@@ -18,8 +18,8 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <dd.java.agent.arg>
-      -javaagent:${settings.localRepository}/com/datadoghq/dd-java-agent/$VERSION/dd-java-agent-$VERSION.jar
-      -Ddd.service=my-java-app
+      -javaagent:${settings.localRepository}/com/datadoghq/dd-java-agent/1.8.0/dd-java-agent-1.8.0.jar
+      -Ddd.service=new-java
       -Ddd.civisibility.enabled=true
     </dd.java.agent.arg>
   </properties>
@@ -34,7 +34,7 @@
     <dependency>
       <groupId>com.datadoghq</groupId>
       <artifactId>dd-java-agent</artifactId>
-      <version>$VERSION</version>
+      <version>1.8.0</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
@@ -46,6 +46,21 @@
   <configuration>
     <argLine>${dd.java.agent.arg}</argLine>
   </configuration>
+</plugin>
+<plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-failsafe-plugin</artifactId>
+  <configuration>
+    <argLine>${dd.java.agent.arg}</argLine>
+  </configuration>
+  <executions>
+    <execution>
+      <goals>
+        <goal>integration-test</goal>
+        <goal>verify</goal>
+      </goals>
+    </execution>
+  </executions>
 </plugin>
       </plugins>
       </build>
