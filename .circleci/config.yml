@@ -22,7 +22,7 @@ jobs:
           command: |
             curl -X POST -H "Content-type: application/json" \
                  -H "DD-API-KEY: $DATADOG_API_KEY" \
-                 -d '{"name": "env", "value": "'"$MY_ENV_VAR"'"}' \
+                 -d '{"name": "environment", "value": "'"$MY_ENV_VAR"'"}' \
                  "https://api.datadoghq.com/api/v1/series"
 
 # Invoke jobs via workflows
